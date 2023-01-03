@@ -11,7 +11,7 @@ function Lines({ state }) {
           stroke={lines.color}
           stroke-width={lines.thickness}
           stroke-linecap="square"
-          className="line line-1"
+          className={lines.weave ? "weave" : ""}
           fill="none"
         ></path>
         <path
@@ -19,7 +19,7 @@ function Lines({ state }) {
           stroke={lines.color}
           stroke-width={lines.thickness}
           stroke-linecap="square"
-          className="line line-2"
+          className={lines.weave ? "weave" : ""}
           fill="none"
         ></path>
       </g>

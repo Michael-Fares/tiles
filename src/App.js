@@ -7,15 +7,31 @@ import { useState } from "react";
 
 function App() {
   const [tesselation, setTesselation] = useState(false);
+  const [currentColor, setCurrentColor] = useState('#FFFFFF')
   /** lazy catch all state for everything */
   const [state, setState] = useState({
     lines: {
       color: "#FFFFFF",
       thickness: 5,
+      weave: false
     },
-    tileSize: 3
+    tileSize: 3,
+    petalColors: ["#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1"],
+    dartColors: ["lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen"],
+    sunColor: ["darkgreen"],
+    octagonColor: ["tomato"],
+    starColor: ["orange"]
+        
   });
-
+  
+  const handleColor = (e, shape, i = 0) => {
+     e.preventDefault();
+     setState((prevState) => {
+      let newState = { ...prevState };
+      newState[shape][i] = currentColor;
+      return newState;
+    });
+  }
   const handleLines = (e, property) => {
     e.preventDefault();
     setState((prevState) => {
@@ -53,6 +69,8 @@ function App() {
         state={state}
         handleLines={handleLines}
         handleTiles={handleTiles}
+        currentColor={currentColor}
+        setCurrentColor={setCurrentColor}
       />
 
       <div className="flex-row-center">
@@ -64,7 +82,7 @@ function App() {
           {tesselation ? (
             <Tesselation state={state} />
           ) : (
-            <TileEdit state={state}  />
+            <TileEdit state={state} handleColor={handleColor} currentColor={currentColor} />
           )}
         </svg>
       </div>

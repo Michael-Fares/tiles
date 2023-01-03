@@ -29,17 +29,13 @@ export const PETAL = [
   ]
   
   export const STAR = [
-    [squareB_Height, squareB_Height],
-    [r_arcB, 0],
-    [squareB_Height, -squareB_Height],
-    [petalCornerHeight, -squareC_Height + gap],
-    [petalHeight, -s + petalCornerHeight + gap],
-    [petalHeight, -dartHeight],
-    [s,0],
-    [petalHeight, dartHeight],
-    [petalHeight, s - petalCornerHeight - gap],
-    [petalCornerHeight, squareC_Height - gap],
-    [squareB_Height, squareB_Height]
+  [squareB_Height, squareB_Height],
+  [r_arcB, 0],
+  [s,0],
+  [petalHeight, dartHeight],
+  [petalHeight, s - petalCornerHeight - gap],
+  [petalCornerHeight, squareC_Height - gap],
+  [squareB_Height, squareB_Height]
   ]
   
   export const SUN = [
@@ -63,14 +59,10 @@ export const PETAL = [
   ]
   export const OCTAGON = [
     [squareB_Height, squareB_Height],
-    [0, r_arcB],
-    [-squareB_Height, squareB_Height],
-    [-r_arcB, 0],
-    [-squareB_Height, -squareB_Height],
-    [0, -r_arcB],
-    [squareB_Height, -squareB_Height],
-    [r_arcB,0],
-    [squareB_Height, squareB_Height]
+  [0, r_arcB],
+  [0,0],
+  [r_arcB,0],
+  [squareB_Height, squareB_Height]
   ]
   
   export const PATTERN_LINE = [

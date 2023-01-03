@@ -1,9 +1,9 @@
 import Tile from "./Tile";
-function TileEdit({state}) {
+function TileEdit({ state, handleColor, currentColor}) {
   return (
     <>
       <g id="tile-edit">
-        <Tile state={state}/>
+        <Tile state={state} handleColor={handleColor} currentColor={currentColor}/>
       </g>
     </>
   );
