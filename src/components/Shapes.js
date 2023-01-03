@@ -7,12 +7,14 @@ import {
 } from "../patterns/pattern1/paths";
 import { s } from "../patterns/pattern1/constants";
 
-function Shapes() {
+function Shapes({state, handleColor}) {
+
   return (
     <>
       <path
         d={sunPath}
-        fill="green"
+        fill={state.sunColor[0]}
+        onClick={(e) => handleColor(e, "sunColor")}
         key={`sun`}
         className={"sun"}
         name={"sun"}
@@ -25,7 +27,8 @@ function Shapes() {
           <>
             <path
               d={petalPath}
-              fill={"royalblue"}
+              fill={state.petalColors[i]}
+              onClick={(e) => handleColor(e, "petalColors", i)}
               transform={`rotate(${rotate8})`}
               transform-origin={`${s} ${s}`}
               key={`petal-${i}`}
@@ -34,7 +37,8 @@ function Shapes() {
             ></path>
             <path
               d={dartPath}
-              fill={"lightgreen"}
+              fill={state.dartColors[i]}
+              onClick={(e) => handleColor(e, "dartColors", i)}
               transform={`rotate(${rotate8})`}
               transform-origin={`${s} ${s}`}
               key={`dart-${i}`}
@@ -52,7 +56,8 @@ function Shapes() {
           <>
             <path
               d={octagonPath}
-              fill={"tomato"}
+              fill={state.octagonColor[0]}
+              onClick={(e) => handleColor(e, "octagonColor")}
               transform={`rotate(${rotate4})`}
               transform-origin={`${s} ${s}`}
               key={`octagon-${i}`}
@@ -62,7 +67,8 @@ function Shapes() {
 
             <path
               d={starPath}
-              fill={"orange"}
+               fill={state.starColor[0]}
+              onClick={(e) => handleColor(e, "starColor")}
               transform={
                 even ? `rotate(${rotate4}) scale(-1,1)` : `rotate(${rotate4})`
               }
@@ -73,7 +79,8 @@ function Shapes() {
             ></path>
             <path
               d={starPath}
-              fill={"orange"}
+              fill={state.starColor[0]}
+              onClick={(e) => handleColor(e, "starColor")}
               transform={
                 even ? `rotate(${rotate4})` : `rotate(${rotate4}) scale(-1, 1)`
               }
