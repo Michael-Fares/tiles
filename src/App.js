@@ -61,12 +61,13 @@ function App() {
           setTesselation(!tesselation);
         }}
       >
-        {tesselation ? "Mode: Tesselation" : "Mode : Tile Edit"}
+        {tesselation ? "Back to tile edit mode" : "Tesselate tile!"}
       </button>
 
       <Editor
         tesselation={tesselation}
         state={state}
+        setState={setState}
         handleLines={handleLines}
         handleTiles={handleTiles}
         currentColor={currentColor}
