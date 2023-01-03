@@ -62,7 +62,7 @@ function Shapes() {
 
             <path
               d={starPath}
-              fill={"black"}
+              fill={"orange"}
               transform={
                 even ? `rotate(${rotate4}) scale(-1,1)` : `rotate(${rotate4})`
               }
@@ -73,7 +73,7 @@ function Shapes() {
             ></path>
             <path
               d={starPath}
-              fill={"black"}
+              fill={"orange"}
               transform={
                 even ? `rotate(${rotate4})` : `rotate(${rotate4}) scale(-1, 1)`
               }
