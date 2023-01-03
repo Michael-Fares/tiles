@@ -1,16 +1,16 @@
 import Tile from "./Tile";
 import { s } from "../patterns/pattern1/constants";
-function Tesselation({ state, handleLines }) {
+function Tesselation({ state }) {
   return (
     <>
       <defs>
         <pattern
           id="pattern"
           viewBox={`${-2 / s} ${-2 / s} ${s * 2} ${s * 2}`}
-          height={`30%`}
-          width={`30%`}
+          height={`${state.tileSize * 10}%`}
+          width={`${state.tileSize * 10}%`}
         >
-          <Tile state={state} handleLines={handleLines}/>
+          <Tile state={state} />
         </pattern>
       </defs>
 

@@ -7,12 +7,13 @@ import { useState } from "react";
 
 function App() {
   const [tesselation, setTesselation] = useState(false);
-
+  /** lazy catch all state for everything */
   const [state, setState] = useState({
     lines: {
       color: "#FFFFFF",
       thickness: 5,
     },
+    tileSize: 3
   });
 
   const handleLines = (e, property) => {
@@ -20,6 +21,15 @@ function App() {
     setState((prevState) => {
       let newState = { ...prevState };
       newState.lines[property] = e.target.value;
+      return newState;
+    });
+  };
+
+  const handleTiles = (e) => {
+    e.preventDefault();
+    setState((prevState) => {
+      let newState = { ...prevState };
+      newState.tileSize = e.target.value;
       return newState;
     });
   };
@@ -42,6 +52,7 @@ function App() {
         tesselation={tesselation}
         state={state}
         handleLines={handleLines}
+        handleTiles={handleTiles}
       />
 
       <div className="flex-row-center">
@@ -51,9 +62,9 @@ function App() {
           width={tesselation ? `100%` : `50%`}
         >
           {tesselation ? (
-            <Tesselation state={state} handleLines={handleLines} />
+            <Tesselation state={state} />
           ) : (
-            <TileEdit state={state} handleLines={handleLines} />
+            <TileEdit state={state}  />
           )}
         </svg>
       </div>

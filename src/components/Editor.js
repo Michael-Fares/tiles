@@ -1,4 +1,4 @@
-function Editor({ tesselation, state, handleLines }) {
+function Editor({ tesselation, state, handleLines, handleTiles }) {
   const colorDisabled = state.lines.thickness === "0";
   return (
     <div className="editor flex-column-start">
@@ -33,14 +33,16 @@ function Editor({ tesselation, state, handleLines }) {
       {tesselation && (
         <div className="tessellation-options flex-row-center">
           <div className="flex-row-center">
-            <label for="tileSize">Tile Amount:</label>
+            <label for="tileSize">Tile Size:</label>
             <input
               name="tileSize"
               id="tileSize"
               type="range"
-              value="1"
-              min="1"
-              max="10"
+              value={state.tileSize}
+              min="2"
+              max="5"
+              step="0.5"
+              onChange={(e) => handleTiles(e)}
             />
           </div>
         </div>
