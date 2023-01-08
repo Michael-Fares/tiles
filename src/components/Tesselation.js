@@ -13,7 +13,6 @@ function Tesselation({ state }) {
           <Tile state={state} />
         </pattern>
       </defs>
-
       <rect
         width={`100%`}
         height={`100%`}

@@ -7,8 +7,7 @@ import {
 } from "../patterns/pattern1/paths";
 import { s } from "../patterns/pattern1/constants";
 
-function Shapes({state, handleColor}) {
-
+function Shapes({ state, handleColor }) {
   return (
     <>
       <path
@@ -67,7 +66,7 @@ function Shapes({state, handleColor}) {
 
             <path
               d={starPath}
-               fill={state.starColor[0]}
+              fill={state.starColor[0]}
               onClick={(e) => handleColor(e, "starColor")}
               transform={
                 even ? `rotate(${rotate4}) scale(-1,1)` : `rotate(${rotate4})`
