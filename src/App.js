@@ -23,7 +23,16 @@ function App() {
     starColor: ["orange"]
         
   });
-  
+  function downloadSVG() {
+    const svg = document.getElementById('container').innerHTML;
+    const blob = new Blob([svg.toString()]);
+    const element = document.createElement("a");
+    element.download = "my-awesome-art.svg";
+    element.href = window.URL.createObjectURL(blob);
+    element.click();
+    element.remove();
+  }
+
   const handleColor = (e, shape, i = 0) => {
      e.preventDefault();
      setState((prevState) => {
@@ -56,9 +65,15 @@ function App() {
     <div className="app">
       <header className="app-header">
       <h1 className="text-center">Islamic Tesselation Generator</h1>
+      <p className="text-center">
+        Design your own Islamic geometric tile and tesselation. Like what you see? Download it anytime as an SVG by clicking the button below.
+       <br/> Drawn with d3.js and React, based on the <a href="https://www.youtube.com/watch?v=Cv7Sbuuo2X8" target="_blank" rel="noreferrer">traditional method as demonstrated by Mohamad Aljanabi.</a>
+      </p>
           <div className="d-flex align-items-center p-1">
 
-          <button className="download">
+          <button className="download"
+          onClick={downloadSVG}
+          >
             Download SVG!
           </button>
           </div>
@@ -76,13 +91,11 @@ function App() {
         setCurrentColor={setCurrentColor}
       />
 
-      <div className="flex-row-center">
+      <div id="container" className="flex-row-center">
         <svg
-          id="result"
+          xmlns="http://www.w3.org/2000/svg"
           className={tesselation ? "tesselation" : "tile"}
           viewBox={`${-2 / s} ${-2 / s} ${s * 2} ${s * 2}`}
-          // height={tesselation ? `100%` : `50%`}
-          // width={tesselation ? `100%` : `50%`}
         >
           {tesselation ? (
             <Tesselation state={state} />

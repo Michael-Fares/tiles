@@ -10,11 +10,19 @@
 * {
 font-family: 'Varela Round', sans-serif;
 }
+a {
+    color: #FFC93C;
+    text-decoration: none;
+}
    
 body {
     color: var(--text-color-primary);
     background-color: var(--background-primary);
     font-size: calc(14px + 0.390625vw);
+}
+.editor .options {
+    color: var(--text-color-primary);
+    text-transform: uppercase;
 }
 
 .flex-row-center {
@@ -58,7 +66,6 @@ button {
     cursor: pointer;
     background-color: var(--button-background);
     border: none;
-    width: 100%;
     color: var(--text-color-primary);
     border-radius: 1rem;
 }
@@ -68,10 +75,20 @@ button:hover {
     box-shadow: var(--box-shadow);
     color: var(--background-primary)
 }
+button.download {
+    width: 100%;
+}
+path {
+    transition: 0.2s ease all;
+}
+
 
 @media only screen and (max-width: 600px) {
     .flex-row-center {
-        justify-content: flex-start;
+        gap: 0.5rem;
+    }
+    button.mode-button {
+        width: 100%;
     }
     svg.tile {
         width: 100%;
