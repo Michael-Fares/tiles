@@ -18,7 +18,7 @@ function Tesselation({ state }) {
         width={`100%`}
         height={`100%`}
         fill="url(#pattern)"
-        stroke="black"
+        stroke="none"
       ></rect>
     </>
   );

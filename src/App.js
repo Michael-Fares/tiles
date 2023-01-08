@@ -16,8 +16,8 @@ function App() {
       weave: false
     },
     tileSize: 3,
-    petalColors: ["#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1", "#4169e1"],
-    dartColors: ["lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen", "lightgreen"],
+    petalColors: Array(8).fill('#4169e1'),
+    dartColors: Array(8).fill('lightgreen'),
     sunColor: ["darkgreen"],
     octagonColor: ["tomato"],
     starColor: ["orange"]
@@ -54,18 +54,20 @@ function App() {
 
   return (
     <div className="app">
-      <h1>This is the app</h1>
+      <header className="app-header">
+      <h1 className="text-center">Islamic Tesselation Generator</h1>
+          <div className="d-flex align-items-center p-1">
 
-      <button
-        onClick={() => {
-          setTesselation(!tesselation);
-        }}
-      >
-        {tesselation ? "Back to tile edit mode" : "Tesselate tile!"}
-      </button>
+          <button className="download">
+            Download SVG!
+          </button>
+          </div>
+      </header>
+      
 
       <Editor
         tesselation={tesselation}
+        setTesselation={setTesselation}
         state={state}
         setState={setState}
         handleLines={handleLines}
@@ -76,9 +78,11 @@ function App() {
 
       <div className="flex-row-center">
         <svg
+          id="result"
+          className={tesselation ? "tesselation" : "tile"}
           viewBox={`${-2 / s} ${-2 / s} ${s * 2} ${s * 2}`}
-          height={tesselation ? `100%` : `50%`}
-          width={tesselation ? `100%` : `50%`}
+          // height={tesselation ? `100%` : `50%`}
+          // width={tesselation ? `100%` : `50%`}
         >
           {tesselation ? (
             <Tesselation state={state} />

@@ -1,25 +1,79 @@
+:root {
+    --background-primary:  #43142f;
+    --background-secondary:  #7FE9DE ;
+    --text-color-primary: #FEFCF3;
+    --button-background: #22A39F;
+    --box-shadow: 0 0 10px 1px var(--text-color-primary);
+}
+
+
+* {
+font-family: 'Varela Round', sans-serif;
+}
+   
+body {
+    color: var(--text-color-primary);
+    background-color: var(--background-primary);
+    font-size: calc(14px + 0.390625vw);
+}
+
 .flex-row-center {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-}
-.flex-column-start {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
-/* may or may not bother with this */
-.weave {
-    filter: drop-shadow(2px 0 0 rgb(100, 100, 100)) drop-shadow(-2px 0 0 antiquewhite) drop-shadow(0 2px 0 antiquewhite) drop-shadow(0 -2px 0 antiquewhite) drop-shadow(1px 0 0 red) drop-shadow(-1px 0 0 red) drop-shadow(0 -1px 0 red) drop-shadow(0 1px 0 red);
-  }
 
+
+svg.tesselation {
+    width: 100%;
+    height: 100%;
+}
+svg.tile {
+    width: 50%;
+}
+svg.tile path {
+    cursor: url(paint.svg) 2 2, pointer;
+}
 .editor {
-    border: 1px solid black;
     padding: 1rem;
+    background-color: var(--background-primary);
+    color: var(--background-primary);
 }
-.editor label.disabled {
+.editor .disabled {
     color: #777;
+    cursor: not-allowed;
 }
+.editor input {
+    cursor: pointer;
+}
+.editor label {
+    color: var(--text-color-primary);
+}
+
+button {
+    padding: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: var(--button-background);
+    border: none;
+    width: 100%;
+    color: var(--text-color-primary);
+    border-radius: 1rem;
+}
+button:hover {
+    transition: 0.2s ease all;
+    background-color: var(--background-secondary);
+    box-shadow: var(--box-shadow);
+    color: var(--background-primary)
+}
+
+@media only screen and (max-width: 600px) {
+    .flex-row-center {
+        justify-content: flex-start;
+    }
+    svg.tile {
+        width: 100%;
+    }
+  }

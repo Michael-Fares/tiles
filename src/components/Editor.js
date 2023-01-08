@@ -5,12 +5,26 @@ function Editor({
   handleTiles,
   currentColor,
   setCurrentColor,
+  setTesselation
 }) {
   const colorDisabled = state.lines.thickness === "0";
   return (
-    <div className="editor flex-column-start">
+    <>
+    <div className="editor flex-row-start">
       <div className="tile-options flex-row-center">
-        <div className="flex-row-center">
+      <div className="flex-row-center">
+    <button className="mode-button"
+        onClick={() => {
+          setTesselation(!tesselation);
+        }}
+      >
+        {tesselation ? "Back to tile edit mode" : "Tesselate tile!"}
+      </button>
+
+    </div>
+
+    
+        <div className="d-flex flex-column">
           <label for="lineColor" className={colorDisabled ? "disabled" : ""}>
             Line color:
           </label>
@@ -24,7 +38,7 @@ function Editor({
           />
         </div>
 
-        <div className="flex-row-center">
+        <div className="d-flex flex-column">
           <label for="lineWidth">Line Weight:</label>
           <input
             name="lineWidth"
@@ -37,7 +51,7 @@ function Editor({
           />
         </div>
         {!tesselation && (
-          <div className="flex-row-center">
+          <div className="d-flex flex-column">
             <label for="fillColor">Fill color:</label>
             <input
               name="fillColor"
@@ -52,7 +66,7 @@ function Editor({
         )}
         {tesselation && (
           <div className="tessellation-options flex-row-center">
-            <div className="flex-row-center">
+            <div className="d-flex flex-column">
               <label for="tileSize">Tile Size:</label>
               <input
                 name="tileSize"
@@ -67,8 +81,13 @@ function Editor({
             </div>
           </div>
         )}
+
+
+       
       </div>
     </div>
+
+    </>
   );
 }
 export default Editor;
