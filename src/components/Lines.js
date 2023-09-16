@@ -6,7 +6,7 @@ function Lines({ pattern, state }) {
   return (
     <>
       <g id="quarter">
-        {line_paths.map((path, i) => {
+        {line_paths.map((path) => {
           return (
             <path
               d={path}

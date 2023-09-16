@@ -21,7 +21,7 @@ export const octagonPath = pathGenerator(OCTAGON);
 
 export const PATTERN_1 = {
   line_paths: [linePath1, linePath2],
-  shapes : [
+  shape_paths : [
     {
       name: "sun",
       count: 1,

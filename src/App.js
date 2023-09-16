@@ -40,8 +40,11 @@ function App() {
     starColor: ["orange"],
     octagonColor: ["tomato"],
     /** test is this can be set dynamically */
-    shapeColors: pattern.shapes.map((shape, i) => {
-      return {
+    shapeColors: pattern.shape_paths.map((shape, i) => {
+
+      return shape?.isEdge ? {
+        [`${shape.name}`]: Array(1).fill(DEFAULT_COLORS[i])
+      } : {
         [`${shape.name}`]: Array(shape.count).fill(DEFAULT_COLORS[i])
       }
     })
