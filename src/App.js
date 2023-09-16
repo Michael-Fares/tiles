@@ -11,6 +11,16 @@ import PATTERN_1  from "./patterns/pattern1"
 import { PATTERN_2 } from "./patterns/pattern1/paths"
 
 function App() {
+  // add default colors needed to start with new schema
+  const DEFAULT_COLORS = [
+    "darkgreen",
+    "lightgreen",
+    "#4169e1",
+    "orange",
+    "tomato",
+    "black",
+    "white"
+  ]
 /** Setting should remain at app level only */
   const [pattern, setPattern] = useState(PATTERN_1);
 /** Should remain at app level only */
@@ -25,10 +35,16 @@ function App() {
     },
     tileSize: 3,
     sunColor: ["darkgreen"],
-    [`${pattern.shapes[1].name}Colors`]: Array(pattern.shapes[1].count).fill("lightgreen"),
+    dartColors: Array(8).fill("lightgreen"),
     petalColors: Array(8).fill("#4169e1"),
     starColor: ["orange"],
     octagonColor: ["tomato"],
+    /** test is this can be set dynamically */
+    shapeColors: pattern.shapes.map((shape, i) => {
+      return {
+        [`${shape.name}`]: Array(shape.count).fill(DEFAULT_COLORS[i])
+      }
+    })
   });
   function downloadSVG() {
     const svg = document.getElementById("container").innerHTML;

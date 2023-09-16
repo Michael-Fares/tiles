@@ -8,9 +8,41 @@ import {
 import { s } from "../patterns/pattern1/constants";
 
 function Shapes({ pattern, state, handleColor }) {
-  const { shapes } = pattern 
+  const { shapes } = pattern
+
   return (
     <>
+    {shapes.map((shape, shapeIndex) => {
+      const isSingle = shape.count === 1;
+      const needsFlip = shape?.flips;
+
+      if(isSingle) {
+        return (
+          <path
+            d={shape.path}
+            fill={state.shapeColors[shapeIndex][shape.name][0]}
+            onClick={(e) => handleColor(e, "sunColor")}
+            key={shape.name}
+            className={shape.name}
+            name={shape.name}
+          ></path>
+        )
+      }
+      
+    })}
+
+
+
+
+
+
+
+
+
+
+
+
+
       <path
         d={sunPath}
         fill={state.sunColor[0]}
