@@ -1,4 +1,4 @@
-import { s } from "../patterns/pattern1/constants";
+import { s } from "../constants";
 
 function Shapes({ pattern, state, handleColor }) {
   const { shape_paths } = pattern;

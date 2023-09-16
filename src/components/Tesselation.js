@@ -1,5 +1,5 @@
 import Tile from "./Tile";
-import { s } from "../patterns/pattern1/constants";
+import { s } from "../constants";
 function Tesselation({ pattern, state }) {
   return (
     <>

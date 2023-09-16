@@ -1,30 +1,25 @@
-import { s } from "./patterns/pattern1/constants";
+import { s, DEFAULT_COLORS } from "./constants";
 import "./app.css";
 import Tesselation from "./components/Tesselation";
 import TileEdit from "./components/TileEdit";
 import Editor from "./components/Editor";
 import { useState } from "react";
-/** New pattern import scheme testing */
-import PATTERN_1 from "./patterns/pattern1";
 
-// DELETE THIS - for POC testing only
-import { PATTERN_2 } from "./patterns/pattern1/paths";
+import PATTERN_1 from "./patterns/pattern1";
+import PATTERN_2 from "./patterns/pattern2";
+
+const PATTERNS = {
+  base_pattern: PATTERN_1,
+  variation_1: PATTERN_2
+}
 
 function App() {
-  // add default colors needed to start with new schema
-  const DEFAULT_COLORS = [
-    "darkgreen",
-    "lightgreen",
-    "#4169e1",
-    "orange",
-    "tomato",
-    "yellow",
-    "white",
-  ];
-  /** Setting should remain at app level only */
-  const [pattern, setPattern] = useState(PATTERN_1);
-  /** Should remain at app level only */
 
+
+  /** Setting should remain at app level only */
+  const [pattern, setPattern] = useState(PATTERNS.base_pattern);
+  /** Should remain at app level only */
+  
   const [tesselation, setTesselation] = useState(false);
   const [currentColor, setCurrentColor] = useState("#FFFFFF");
   /** lazy catch all state for everything */
@@ -88,7 +83,7 @@ function App() {
         <p className="text-center">
           Design your own Islamic geometric tile and tesselation. Like what you
           see? Download it anytime as an SVG by clicking the button below.
-          <br /> Drawn with d3.js and React, based on the{" "}
+          <br /> Drawn with d3.js and React, based on the
           <a
             href="https://www.youtube.com/watch?v=Cv7Sbuuo2X8"
             target="_blank"
@@ -102,9 +97,22 @@ function App() {
             Download SVG!
           </button>
         </div>
-        {/* <button className="download btn-warning" onClick={() => setPattern(PATTERN_2)}>
+        {/* <button className="download btn-warning" onClick={() => setPattern(PATTERNS.base_pattern)}>
             change
-      </button> */}
+        </button> */}
+        <label htmlFor="choose_pattern">
+          Choose pattern:
+        </label>
+        <select id="choose_pattern" onChange={(e) => {
+            console.log(e.target.value)
+            setPattern(PATTERNS[e.target.value])
+          }}>
+          {Object.keys(PATTERNS).map(key => {
+            return (
+              <option value={key} key={key}>{key.replace("_"," ").toUpperCase()}</option>
+            )
+          })}
+        </select>
       </header>
 
       <Editor

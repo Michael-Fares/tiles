@@ -1,4 +1,4 @@
-import { s } from "../patterns/pattern1/constants";
+import { s } from "../constants";
 
 function Lines({ pattern, state }) {
   const { line_paths } = pattern
