@@ -18,7 +18,7 @@ function App() {
     "#4169e1",
     "orange",
     "tomato",
-    "black",
+    "yellow",
     "white"
   ]
 /** Setting should remain at app level only */
