@@ -5,10 +5,10 @@ import TileEdit from "./components/TileEdit";
 import Editor from "./components/Editor";
 import { useState } from "react";
 /** New pattern import scheme testing */
-import PATTERN_1  from "./patterns/pattern1"
+import PATTERN_1 from "./patterns/pattern1";
 
 // DELETE THIS - for POC testing only
-import { PATTERN_2 } from "./patterns/pattern1/paths"
+import { PATTERN_2 } from "./patterns/pattern1/paths";
 
 function App() {
   // add default colors needed to start with new schema
@@ -19,11 +19,11 @@ function App() {
     "orange",
     "tomato",
     "yellow",
-    "white"
-  ]
-/** Setting should remain at app level only */
+    "white",
+  ];
+  /** Setting should remain at app level only */
   const [pattern, setPattern] = useState(PATTERN_1);
-/** Should remain at app level only */
+  /** Should remain at app level only */
 
   const [tesselation, setTesselation] = useState(false);
   const [currentColor, setCurrentColor] = useState("#FFFFFF");
@@ -34,20 +34,16 @@ function App() {
       thickness: 5,
     },
     tileSize: 3,
-    sunColor: ["darkgreen"],
-    dartColors: Array(8).fill("lightgreen"),
-    petalColors: Array(8).fill("#4169e1"),
-    starColor: ["orange"],
-    octagonColor: ["tomato"],
     /** test is this can be set dynamically */
     shapeColors: pattern.shape_paths.map((shape, i) => {
-
-      return shape?.isEdge ? {
-        [`${shape.name}`]: Array(1).fill(DEFAULT_COLORS[i])
-      } : {
-        [`${shape.name}`]: Array(shape.count).fill(DEFAULT_COLORS[i])
-      }
-    })
+      return shape?.isEdge
+        ? {
+            [`${shape.name}`]: Array(1).fill(DEFAULT_COLORS[i]),
+          }
+        : {
+            [`${shape.name}`]: Array(shape.count).fill(DEFAULT_COLORS[i]),
+          };
+    }),
   });
   function downloadSVG() {
     const svg = document.getElementById("container").innerHTML;
@@ -59,11 +55,11 @@ function App() {
     element.remove();
   }
 
-  const handleColor = (e, shape, i = 0) => {
+  const handleColor = (e, shapeIndex, shapeName, colorIndex = 0) => {
     e.preventDefault();
     setState((prevState) => {
       let newState = { ...prevState };
-      newState[shape][i] = currentColor;
+      newState.shapeColors[shapeIndex][shapeName][colorIndex] = currentColor;
       return newState;
     });
   };
@@ -106,13 +102,10 @@ function App() {
             Download SVG!
           </button>
         </div>
-      {/* <button className="download btn-warning" onClick={() => setPattern(PATTERN_2)}>
+        {/* <button className="download btn-warning" onClick={() => setPattern(PATTERN_2)}>
             change
       </button> */}
-    
       </header>
-
-    
 
       <Editor
         pattern={pattern}

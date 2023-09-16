@@ -20,7 +20,7 @@ function Shapes({ pattern, state, handleColor }) {
             <path
               d={shape.path}
               fill={state.shapeColors[shapeIndex][shape.name][0]}
-              onClick={(e) => handleColor(e, "sunColor")}
+              onClick={(e) => handleColor(e, shapeIndex, shape.name)}
               key={shape.name}
               className={shape.name}
               name={shape.name}
@@ -37,7 +37,11 @@ function Shapes({ pattern, state, handleColor }) {
                     ? state.shapeColors[shapeIndex][shape.name][i]
                     : state.shapeColors[shapeIndex][shape.name][0]
                 }
-                onClick={(e) => handleColor(e, "sunColor")}
+                onClick={(e) => {
+                  return !isEdge
+                    ? handleColor(e, shapeIndex, shape.name, i)
+                    : handleColor(e, shapeIndex, shape.name);
+                }}
                 key={`${shape.name}-${i}`}
                 className={`${shape.name}-${i}`}
                 name={`${shape.name}-${i}`}
@@ -59,7 +63,11 @@ function Shapes({ pattern, state, handleColor }) {
                       ? state.shapeColors[shapeIndex][shape.name][i]
                       : state.shapeColors[shapeIndex][shape.name][0]
                   }
-                  onClick={(e) => handleColor(e, "starColor")}
+                  onClick={(e) => {
+                    return !isEdge
+                      ? handleColor(e, shapeIndex, shape.name, i)
+                      : handleColor(e, shapeIndex, shape.name);
+                  }}
                   transform={
                     even
                       ? `rotate(${rotate4}) scale(-1,1)`
@@ -77,7 +85,11 @@ function Shapes({ pattern, state, handleColor }) {
                       ? state.shapeColors[shapeIndex][shape.name][i]
                       : state.shapeColors[shapeIndex][shape.name][0]
                   }
-                  onClick={(e) => handleColor(e, "starColor")}
+                  onClick={(e) => {
+                    return !isEdge
+                      ? handleColor(e, shapeIndex, shape.name, i)
+                      : handleColor(e, shapeIndex, shape.name);
+                  }}
                   transform={
                     even
                       ? `rotate(${rotate4})`

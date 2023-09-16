@@ -42,7 +42,7 @@ svg.tile {
     width: 50%;
 }
 svg.tile path {
-    cursor: url(paint.svg) 2 2, pointer;
+    cursor: pointer;
 }
 .editor {
     padding: 1rem;
