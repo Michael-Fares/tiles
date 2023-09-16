@@ -87,9 +87,9 @@ function App() {
             Download SVG!
           </button>
         </div>
-      <button className="download btn-warning" onClick={() => setPattern(PATTERN_2)}>
+      {/* <button className="download btn-warning" onClick={() => setPattern(PATTERN_2)}>
             change
-      </button>
+      </button> */}
     
       </header>
 
@@ -114,7 +114,7 @@ function App() {
           viewBox={`${-2 / s} ${-2 / s} ${s * 2} ${s * 2}`}
         >
           {tesselation ? (
-            <Tesselation state={state} />
+            <Tesselation pattern={pattern} state={state} />
           ) : (
             <TileEdit
               pattern={pattern}
