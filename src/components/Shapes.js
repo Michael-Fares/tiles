@@ -7,7 +7,8 @@ import {
 } from "../patterns/pattern1/paths";
 import { s } from "../patterns/pattern1/constants";
 
-function Shapes({ state, handleColor }) {
+function Shapes({ pattern, state, handleColor }) {
+  const { shapes } = pattern 
   return (
     <>
       <path

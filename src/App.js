@@ -4,8 +4,17 @@ import Tesselation from "./components/Tesselation";
 import TileEdit from "./components/TileEdit";
 import Editor from "./components/Editor";
 import { useState } from "react";
+/** New pattern import scheme testing */
+import PATTERN_1  from "./patterns/pattern1"
+
+// DELETE THIS - for POC testing only
+import { PATTERN_2 } from "./patterns/pattern1/paths"
 
 function App() {
+/** Setting should remain at app level only */
+  const [pattern, setPattern] = useState(PATTERN_1);
+/** Should remain at app level only */
+
   const [tesselation, setTesselation] = useState(false);
   const [currentColor, setCurrentColor] = useState("#FFFFFF");
   /** lazy catch all state for everything */
@@ -13,14 +22,13 @@ function App() {
     lines: {
       color: "#FFFFFF",
       thickness: 5,
-      weave: false,
     },
     tileSize: 3,
-    petalColors: Array(8).fill("#4169e1"),
-    dartColors: Array(8).fill("lightgreen"),
     sunColor: ["darkgreen"],
-    octagonColor: ["tomato"],
+    [`${pattern.shapes[1].name}Colors`]: Array(pattern.shapes[1].count).fill("lightgreen"),
+    petalColors: Array(8).fill("#4169e1"),
     starColor: ["orange"],
+    octagonColor: ["tomato"],
   });
   function downloadSVG() {
     const svg = document.getElementById("container").innerHTML;
@@ -79,9 +87,16 @@ function App() {
             Download SVG!
           </button>
         </div>
+      <button className="download btn-warning" onClick={() => setPattern(PATTERN_2)}>
+            change
+      </button>
+    
       </header>
 
+    
+
       <Editor
+        pattern={pattern}
         tesselation={tesselation}
         setTesselation={setTesselation}
         state={state}
@@ -102,6 +117,7 @@ function App() {
             <Tesselation state={state} />
           ) : (
             <TileEdit
+              pattern={pattern}
               state={state}
               handleColor={handleColor}
               currentColor={currentColor}

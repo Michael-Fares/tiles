@@ -1,4 +1,5 @@
 function Editor({
+  pattern,
   tesselation,
   state,
   handleLines,

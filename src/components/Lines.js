@@ -1,27 +1,22 @@
-import { linePath1, linePath2 } from "../patterns/pattern1/paths";
 import { s } from "../patterns/pattern1/constants";
 
-function Lines({ state }) {
+function Lines({ pattern, state }) {
+  const { line_paths } = pattern
   const { lines } = state;
   return (
     <>
       <g id="quarter">
-        <path
-          d={linePath1}
-          stroke={lines.color}
-          stroke-width={lines.thickness}
-          stroke-linecap="square"
-          className={lines.weave ? "weave" : ""}
-          fill="none"
-        ></path>
-        <path
-          d={linePath2}
-          stroke={lines.color}
-          stroke-width={lines.thickness}
-          stroke-linecap="square"
-          className={lines.weave ? "weave" : ""}
-          fill="none"
-        ></path>
+        {line_paths.map((path, i) => {
+          return (
+            <path
+              d={path}
+              stroke={lines.color}
+              stroke-width={lines.thickness}
+              stroke-linecap="square"
+              fill="none"
+            ></path>
+          );
+        })}
       </g>
 
       {[...Array(4)].map((_, i) => {
