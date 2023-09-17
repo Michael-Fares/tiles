@@ -3,7 +3,7 @@ import "./app.css";
 import Tesselation from "./components/Tesselation";
 import TileEdit from "./components/TileEdit";
 import Editor from "./components/Editor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import PATTERN_1 from "./patterns/pattern1";
 import PATTERN_2 from "./patterns/pattern2";
@@ -15,7 +15,7 @@ const PATTERNS = {
 
 function App() {
 
-
+  
   /** Setting should remain at app level only */
   const [pattern, setPattern] = useState(PATTERNS.base_pattern);
   /** Should remain at app level only */
@@ -40,6 +40,7 @@ function App() {
           };
     }),
   });
+
   function downloadSVG() {
     const svg = document.getElementById("container").innerHTML;
     const blob = new Blob([svg.toString()]);
@@ -103,16 +104,16 @@ function App() {
         <label htmlFor="choose_pattern">
           Choose pattern:
         </label>
-        <select id="choose_pattern" onChange={(e) => {
-            console.log(e.target.value)
-            setPattern(PATTERNS[e.target.value])
-          }}>
-          {Object.keys(PATTERNS).map(key => {
-            return (
-              <option value={key} key={key}>{key.replace("_"," ").toUpperCase()}</option>
-            )
-          })}
-        </select>
+              <select id="choose_pattern" onChange={(e) => {
+                  console.log(e.target.value)
+                  setPattern(PATTERNS[e.target.value])
+                }}>
+                {Object.keys(PATTERNS).map(key => {
+                  return (
+                    <option value={key} key={key}>{key.replace("_"," ").toUpperCase()}</option>
+                  )
+                })}
+              </select>
       </header>
 
       <Editor

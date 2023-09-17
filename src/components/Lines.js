@@ -9,6 +9,7 @@ function Lines({ pattern, state }) {
         {line_paths.map((path) => {
           return (
             <path
+              key={path}
               d={path}
               stroke={lines.color}
               stroke-width={lines.thickness}
@@ -23,6 +24,7 @@ function Lines({ pattern, state }) {
         const rotate4 = i * 90;
         return (
           <use
+            key={`${i}`}
             href="#quarter"
             transform={`rotate(${rotate4})`}
             transform-origin={`${s} ${s}`}
