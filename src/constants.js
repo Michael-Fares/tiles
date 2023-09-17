@@ -49,3 +49,12 @@ export const DEFAULT_COLORS = [
     "#23D7FB",
     "white",
 ]; 
+
+export const DEFAULT_COLORS_2 = [
+    ["darkgreen"],
+    ["lightgreen","lightgreen","lightgreen","lightgreen","lightgreen","lightgreen","lightgreen","lightgreen"],
+    ["#4169e1","#4169e1","#4169e1","#4169e1","#4169e1","#4169e1","#4169e1","#4169e1",],
+    ["orange"],
+    ["tomato"],
+    ["yellow"]
+]

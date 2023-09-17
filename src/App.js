@@ -1,4 +1,4 @@
-import { s, DEFAULT_COLORS } from "./constants";
+import { s } from "./constants";
 import "./app.css";
 import Tesselation from "./components/Tesselation";
 import TileEdit from "./components/TileEdit";
@@ -28,19 +28,7 @@ function App() {
       color: "#FFFFFF",
       thickness: 5,
     },
-    tileSize: 3,
-    /** test is this can be set dynamically - YES, but when the pattern is set to something else it breaks.....
-     * THIS SHOULD PROBABLY COMPLETELY REDESIGNED SO THAT IT ISN'T DEPENDENT ON THE PATTERN CHANGING
-    */
-    shapeColors: pattern.shape_paths.map((shape, i) => {
-      return shape?.isEdge
-        ? {
-            [`${shape.name}`]: Array(1).fill(DEFAULT_COLORS[i]),
-          }
-        : {
-            [`${shape.name}`]: Array(shape.count).fill(DEFAULT_COLORS[i]),
-          };
-    }),
+    tileSize: 3
   });
 
   function downloadSVG() {
@@ -53,15 +41,7 @@ function App() {
     element.remove();
   }
 
-  const handleColor = (e, shapeIndex, shapeName, colorIndex = 0) => {
-    e.preventDefault();
-    setState((prevState) => {
-      let newState = { ...prevState };
-      newState.shapeColors[shapeIndex][shapeName][colorIndex] = currentColor;
-      return newState;
-    });
-  };
-  const handleLines = (e, property) => {
+const handleLines = (e, property) => {
     e.preventDefault();
     setState((prevState) => {
       let newState = { ...prevState };
@@ -86,7 +66,7 @@ function App() {
         <p className="text-center">
           Design your own Islamic geometric tile and tesselation. Like what you
           see? Download it anytime as an SVG by clicking the button below.
-          <br /> Drawn with d3.js and React, based on the
+          <br /> Drawn with d3.js and React, based on the {" "}
           <a
             href="https://www.youtube.com/watch?v=Cv7Sbuuo2X8"
             target="_blank"
@@ -142,7 +122,6 @@ function App() {
             <TileEdit
               pattern={pattern}
               state={state}
-              handleColor={handleColor}
               currentColor={currentColor}
             />
           )}

@@ -1,7 +1,23 @@
-import { s } from "../constants";
+import { s, DEFAULT_COLORS, DEFAULT_COLORS_2 } from "../constants";
+import { useState, useEffect } from "react";
 
-function Shapes({ pattern, state, handleColor }) {
-  const { shape_paths } = pattern;
+function Shapes({ pattern, state, handleColor, currentColor }) {
+
+const [ colors, setColors ] = useState([]);
+
+  useEffect(() => {
+    setColors(pattern.shape_paths.map((shape, shapeIndex) => {
+      const singleColor = shape.count === 1 || shape?.isEdge
+      if(singleColor) {
+        return [DEFAULT_COLORS[shapeIndex]]
+      } else {
+        return Array(1).fill(DEFAULT_COLORS[shapeIndex])
+      }
+    }))
+  }, [pattern])
+
+
+
   const TRANSFORM_ORIGIN = `${s} ${s}`;
   /**
    * NOTE
@@ -10,7 +26,8 @@ function Shapes({ pattern, state, handleColor }) {
    */
   return (
     <>
-      {shape_paths.map((shape, shapeIndex) => {
+      {pattern.shape_paths.map((shape, shapeIndex) => {
+        console.log("colors in render", colors)
         const isSingle = shape.count === 1;
         const needsFlip = shape?.flips;
         const isEdge = shape?.isEdge;
@@ -19,11 +36,11 @@ function Shapes({ pattern, state, handleColor }) {
           return (
             <path
               d={shape.path}
-              fill={state.shapeColors[shapeIndex][shape.name][0]}
-              onClick={(e) => handleColor(e, shapeIndex, shape.name)}
+              fill={colors[shapeIndex]}
               key={shape.name}
               className={shape.name}
               name={shape.name}
+              onClick={() => console.log("shapeIndex", shapeIndex)}
             ></path>
           );
         } else if (!needsFlip) {
@@ -32,16 +49,8 @@ function Shapes({ pattern, state, handleColor }) {
             return (
               <path
                 d={shape.path}
-                fill={
-                  !isEdge
-                    ? state.shapeColors[shapeIndex][shape.name][i]
-                    : state.shapeColors[shapeIndex][shape.name][0]
-                }
-                onClick={(e) => {
-                  return !isEdge
-                    ? handleColor(e, shapeIndex, shape.name, i)
-                    : handleColor(e, shapeIndex, shape.name);
-                }}
+                fill={colors[shapeIndex]}
+                onClick={() => console.log("shapeIndex", shapeIndex, "i", i)}
                 key={`${shape.name}-${i}`}
                 className={`${shape.name}-${i}`}
                 name={`${shape.name}-${i}`}
@@ -58,16 +67,8 @@ function Shapes({ pattern, state, handleColor }) {
               <>
                 <path
                   d={shape.path}
-                  fill={
-                    !isEdge
-                      ? state.shapeColors[shapeIndex][shape.name][i]
-                      : state.shapeColors[shapeIndex][shape.name][0]
-                  }
-                  onClick={(e) => {
-                    return !isEdge
-                      ? handleColor(e, shapeIndex, shape.name, i)
-                      : handleColor(e, shapeIndex, shape.name);
-                  }}
+                  fill={colors[shapeIndex]}
+                  onClick={() => console.log("shapeIndex", shapeIndex, "i", i)}
                   transform={
                     even
                       ? `rotate(${rotate4}) scale(-1,1)`
@@ -80,16 +81,8 @@ function Shapes({ pattern, state, handleColor }) {
                 ></path>
                 <path
                   d={shape.path}
-                  fill={
-                    !isEdge
-                      ? state.shapeColors[shapeIndex][shape.name][i]
-                      : state.shapeColors[shapeIndex][shape.name][0]
-                  }
-                  onClick={(e) => {
-                    return !isEdge
-                      ? handleColor(e, shapeIndex, shape.name, i)
-                      : handleColor(e, shapeIndex, shape.name);
-                  }}
+                  fill={colors[shapeIndex]}
+                  onClick={() => console.log("shapeIndex", shapeIndex, "i", i)}
                   transform={
                     even
                       ? `rotate(${rotate4})`
@@ -104,6 +97,7 @@ function Shapes({ pattern, state, handleColor }) {
             );
           });
         }
+     
       })}
     </>
   );
