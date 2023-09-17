@@ -1,6 +1,6 @@
 import Tile from "./Tile";
 import { s } from "../constants";
-function Tesselation({ pattern, state }) {
+function Tesselation({ pattern, state, colors, currentColor }) {
   return (
     <>
       <defs>
@@ -10,7 +10,7 @@ function Tesselation({ pattern, state }) {
           height={`${state.tileSize * 10}%`}
           width={`${state.tileSize * 10}%`}
         >
-          <Tile pattern={pattern} state={state} />
+          <Tile pattern={pattern} state={state} currentColor={currentColor} colors={colors}/>
         </pattern>
       </defs>
       <rect

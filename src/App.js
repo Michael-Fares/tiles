@@ -1,4 +1,4 @@
-import { s } from "./constants";
+import { s, DEFAULT_COLORS } from "./constants";
 import "./app.css";
 import Tesselation from "./components/Tesselation";
 import TileEdit from "./components/TileEdit";
@@ -10,26 +10,61 @@ import PATTERN_2 from "./patterns/pattern2";
 
 const PATTERNS = {
   base_pattern: PATTERN_1,
-  variation_1: PATTERN_2
-}
+  variation_1: PATTERN_2,
+};
 
 function App() {
-
-  
   /** Setting should remain at app level only */
   const [pattern, setPattern] = useState(PATTERNS.base_pattern);
   /** Should remain at app level only */
-  
+  const [selectedPattern, setSelectedPattern] = useState("base_pattern");
   const [tesselation, setTesselation] = useState(false);
+  const [colors, setColors] = useState(
+    pattern.shape_paths.map((shape, shapeIndex) => {
+      const singleColor = shape.count === 1 || shape?.isEdge;
+      if(singleColor) {
+        return [DEFAULT_COLORS[shapeIndex]];
+      } else {
+        return Array(shape.count).fill(DEFAULT_COLORS[shapeIndex]);
+      }
+    })
+  );
   const [currentColor, setCurrentColor] = useState("#FFFFFF");
+
   /** lazy catch all state for everything */
   const [state, setState] = useState({
     lines: {
       color: "#FFFFFF",
       thickness: 5,
     },
-    tileSize: 3
+    tileSize: 3,
   });
+
+  useEffect(() => {
+    setPattern(PATTERNS[selectedPattern]);
+  }, [selectedPattern]);
+
+  useEffect(() => {
+    setColors(
+      pattern.shape_paths.map((shape, shapeIndex) => {
+        const singleColor = shape.count === 1 || shape?.isEdge;
+        if (singleColor) {
+          return [DEFAULT_COLORS[shapeIndex]];
+        } else {
+          return Array(shape.count).fill(DEFAULT_COLORS[shapeIndex]);
+        }
+      })
+    );
+  }, [pattern]);
+
+  const handleColors = (e, shapeIndex, i = 0) => {
+    e.preventDefault();
+    setColors((prevState) => {
+      let newState = [...prevState];
+      newState[shapeIndex][i] = currentColor;
+      return newState;
+    });
+  };
 
   function downloadSVG() {
     const svg = document.getElementById("container").innerHTML;
@@ -41,7 +76,7 @@ function App() {
     element.remove();
   }
 
-const handleLines = (e, property) => {
+  const handleLines = (e, property) => {
     e.preventDefault();
     setState((prevState) => {
       let newState = { ...prevState };
@@ -66,7 +101,7 @@ const handleLines = (e, property) => {
         <p className="text-center">
           Design your own Islamic geometric tile and tesselation. Like what you
           see? Download it anytime as an SVG by clicking the button below.
-          <br /> Drawn with d3.js and React, based on the {" "}
+          <br /> Drawn with d3.js and React, based on the{" "}
           <a
             href="https://www.youtube.com/watch?v=Cv7Sbuuo2X8"
             target="_blank"
@@ -83,19 +118,23 @@ const handleLines = (e, property) => {
         {/* <button className="download btn-warning" onClick={() => setPattern(PATTERNS.base_pattern)}>
             change
         </button> */}
-        <label htmlFor="choose_pattern">
-          Choose pattern:
-        </label>
-              <select id="choose_pattern" onChange={(e) => {
-                  console.log(e.target.value)
-                  setPattern(PATTERNS[e.target.value])
-                }}>
-                {Object.keys(PATTERNS).map(key => {
-                  return (
-                    <option value={key} key={key}>{key.replace("_"," ").toUpperCase()}</option>
-                  )
-                })}
-              </select>
+        <label htmlFor="choose_pattern">Choose pattern:</label>
+        <select
+          id="choose_pattern"
+          value={selectedPattern}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setSelectedPattern(e.target.value);
+          }}
+        >
+          {Object.keys(PATTERNS).map((key) => {
+            return (
+              <option value={key} key={key}>
+                {key.replace("_", " ").toUpperCase()}
+              </option>
+            );
+          })}
+        </select>
       </header>
 
       <Editor
@@ -106,6 +145,8 @@ const handleLines = (e, property) => {
         setState={setState}
         handleLines={handleLines}
         handleTiles={handleTiles}
+        colors={colors}
+        handleColors={handleColors}
         currentColor={currentColor}
         setCurrentColor={setCurrentColor}
       />
@@ -117,12 +158,20 @@ const handleLines = (e, property) => {
           viewBox={`${-2 / s} ${-2 / s} ${s * 2} ${s * 2}`}
         >
           {tesselation ? (
-            <Tesselation pattern={pattern} state={state} />
+            <Tesselation
+              pattern={pattern}
+              state={state}
+              currentColor={currentColor}
+              colors={colors}
+              handleColors={handleColors}
+            />
           ) : (
             <TileEdit
               pattern={pattern}
               state={state}
               currentColor={currentColor}
+              colors={colors}
+              handleColors={handleColors}
             />
           )}
         </svg>

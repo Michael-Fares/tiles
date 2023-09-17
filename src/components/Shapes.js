@@ -1,23 +1,15 @@
-import { s, DEFAULT_COLORS, DEFAULT_COLORS_2 } from "../constants";
-import { useState, useEffect } from "react";
-
-function Shapes({ pattern, state, handleColor, currentColor }) {
-
-const [ colors, setColors ] = useState([]);
-
-  useEffect(() => {
-    setColors(pattern.shape_paths.map((shape, shapeIndex) => {
-      const singleColor = shape.count === 1 || shape?.isEdge
-      if(singleColor) {
-        return [DEFAULT_COLORS[shapeIndex]]
-      } else {
-        return Array(1).fill(DEFAULT_COLORS[shapeIndex])
-      }
-    }))
-  }, [pattern])
+import { useEffect } from "react";
+import { s } from "../constants";
 
 
+function Shapes({ pattern, colors, handleColors }) {
 
+
+   useEffect(() => {
+    console.log("the current colors are: ", colors)
+   }, [colors])
+
+  
   const TRANSFORM_ORIGIN = `${s} ${s}`;
   /**
    * NOTE
@@ -27,30 +19,35 @@ const [ colors, setColors ] = useState([]);
   return (
     <>
       {pattern.shape_paths.map((shape, shapeIndex) => {
-        console.log("colors in render", colors)
         const isSingle = shape.count === 1;
         const needsFlip = shape?.flips;
         const isEdge = shape?.isEdge;
+        console.log(isEdge)
 
         if (isSingle) {
           return (
             <path
               d={shape.path}
-              fill={colors[shapeIndex]}
+              fill={colors[shapeIndex][0]}
+              onClick={(e) => {
+                handleColors(e, shapeIndex)
+              }}
               key={shape.name}
               className={shape.name}
               name={shape.name}
-              onClick={() => console.log("shapeIndex", shapeIndex)}
             ></path>
           );
         } else if (!needsFlip) {
           return [...Array(shape.count)].map((_, i) => {
+  
             const rotation = (360 / shape.count) * i;
             return (
               <path
                 d={shape.path}
-                fill={colors[shapeIndex]}
-                onClick={() => console.log("shapeIndex", shapeIndex, "i", i)}
+                fill={isEdge ? colors[shapeIndex] : colors[shapeIndex][i]}
+                onClick={(e) => {
+                  handleColors(e, shapeIndex, i)
+                }}
                 key={`${shape.name}-${i}`}
                 className={`${shape.name}-${i}`}
                 name={`${shape.name}-${i}`}
@@ -67,8 +64,10 @@ const [ colors, setColors ] = useState([]);
               <>
                 <path
                   d={shape.path}
-                  fill={colors[shapeIndex]}
-                  onClick={() => console.log("shapeIndex", shapeIndex, "i", i)}
+                  fill={isEdge ? colors[shapeIndex][0] : colors[shapeIndex][i]}
+                  onClick={(e) => {
+                    handleColors(e, shapeIndex)
+                  }}
                   transform={
                     even
                       ? `rotate(${rotate4}) scale(-1,1)`
@@ -81,8 +80,10 @@ const [ colors, setColors ] = useState([]);
                 ></path>
                 <path
                   d={shape.path}
-                  fill={colors[shapeIndex]}
-                  onClick={() => console.log("shapeIndex", shapeIndex, "i", i)}
+                  fill={isEdge ? colors[shapeIndex][0] : colors[shapeIndex][i]}
+                  onClick={(e) => {
+                    handleColors(e, shapeIndex)
+                  }}
                   transform={
                     even
                       ? `rotate(${rotate4})`
@@ -97,7 +98,6 @@ const [ colors, setColors ] = useState([]);
             );
           });
         }
-     
       })}
     </>
   );

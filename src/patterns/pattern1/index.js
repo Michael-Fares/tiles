@@ -8,6 +8,7 @@ import {
   octagonPath,
 } from "./paths";
 const PATTERN_1 = {
+  name: "base_pattern",
   line_paths: [linePath1, linePath2],
   shape_paths: [
     {
