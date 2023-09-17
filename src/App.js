@@ -29,7 +29,9 @@ function App() {
       thickness: 5,
     },
     tileSize: 3,
-    /** test is this can be set dynamically */
+    /** test is this can be set dynamically - YES, but when the pattern is set to something else it breaks.....
+     * THIS SHOULD PROBABLY COMPLETELY REDESIGNED SO THAT IT ISN'T DEPENDENT ON THE PATTERN CHANGING
+    */
     shapeColors: pattern.shape_paths.map((shape, i) => {
       return shape?.isEdge
         ? {
