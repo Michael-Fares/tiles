@@ -38,3 +38,23 @@ export const gap = r_arcB - r_arcC;
 height of point at dart base from bottom of export construction. Involves the side of square C divided by root 6 - need to figure out why  
 */
 export const dartHeight = squareC_Height / Math.sqrt(6);
+
+/** default colors for the starting tile */
+export const DEFAULT_COLORS = [
+    "darkgreen",
+    "lightgreen",
+    "#4169e1",
+    "orange",
+    "tomato",
+    "#23D7FB",
+    "white",
+]; 
+
+export const DEFAULT_COLORS_2 = [
+    ["darkgreen"],
+    ["lightgreen","lightgreen","lightgreen","lightgreen","lightgreen","lightgreen","lightgreen","lightgreen"],
+    ["#4169e1","#4169e1","#4169e1","#4169e1","#4169e1","#4169e1","#4169e1","#4169e1",],
+    ["orange"],
+    ["tomato"],
+    ["yellow"]
+]

@@ -1,17 +1,17 @@
 :root {
-    --background-primary:  #43142f;
+    --background-primary:  #050a15;
     --background-secondary:  #7FE9DE ;
     --text-color-primary: #FEFCF3;
     --button-background: #22A39F;
     --box-shadow: 0 0 10px 1px var(--text-color-primary);
+    --highlight-color: #FFC93C;
 }
-
 
 * {
 font-family: 'Varela Round', sans-serif;
 }
 a {
-    color: #FFC93C;
+    color: var(--highlight-color);
     text-decoration: none;
 }
    
@@ -42,7 +42,10 @@ svg.tile {
     width: 50%;
 }
 svg.tile path {
-    cursor: url(paint.svg) 2 2, pointer;
+    cursor: pointer;
+}
+select#choose_pattern {
+    cursor: pointer;
 }
 .editor {
     padding: 1rem;
@@ -75,20 +78,28 @@ button:hover {
     box-shadow: var(--box-shadow);
     color: var(--background-primary)
 }
-button.download {
+/* button.download {
     width: 100%;
-}
+} */
 path {
-    transition: 0.2s ease all;
+    transition: 0.2s ease fill;
 }
-
+.new-feature {
+    color: #F2F7A1;
+}
 
 @media only screen and (max-width: 600px) {
+    button:hover {
+        transition: none;
+        background-color: var(--button-background);
+        box-shadow: unset;
+        color: var(--text-color-primary);
+    }
     .flex-row-center {
         gap: 0.5rem;
     }
     button.mode-button {
-        width: 100%;
+        width: 95%;
     }
     svg.tile {
         width: 100%;

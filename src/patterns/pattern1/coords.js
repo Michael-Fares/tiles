@@ -8,7 +8,7 @@ import {
   petalCornerHeight,
   gap,
   dartHeight,
-} from "./constants";
+} from "../../constants";
 
 export const PETAL = [
   [squareB_Height, squareB_Height],

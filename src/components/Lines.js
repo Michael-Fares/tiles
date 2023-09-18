@@ -1,4 +1,4 @@
-import { s } from "../patterns/pattern1/constants";
+import { s } from "../constants";
 
 function Lines({ pattern, state }) {
   const { line_paths } = pattern
@@ -6,13 +6,14 @@ function Lines({ pattern, state }) {
   return (
     <>
       <g id="quarter">
-        {line_paths.map((path, i) => {
+        {line_paths.map((path) => {
           return (
             <path
+              key={path}
               d={path}
               stroke={lines.color}
-              stroke-width={lines.thickness}
-              stroke-linecap="square"
+              strokeWidth={lines.thickness}
+              strokeLinecap="square"
               fill="none"
             ></path>
           );
@@ -23,6 +24,7 @@ function Lines({ pattern, state }) {
         const rotate4 = i * 90;
         return (
           <use
+            key={`${i}`}
             href="#quarter"
             transform={`rotate(${rotate4})`}
             transform-origin={`${s} ${s}`}
