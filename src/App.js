@@ -1,4 +1,5 @@
 import { s, DEFAULT_COLORS } from "./constants";
+import { mapInitialColorsFromPattern } from "./utils";
 import "./app.css";
 import Tesselation from "./components/Tesselation";
 import TileEdit from "./components/TileEdit";
@@ -14,20 +15,13 @@ const PATTERNS = {
 };
 
 function App() {
-  /** Setting should remain at app level only */
+
   const [pattern, setPattern] = useState(PATTERNS.base_pattern);
-  /** Should remain at app level only */
+
   const [selectedPattern, setSelectedPattern] = useState("base_pattern");
   const [tesselation, setTesselation] = useState(false);
   const [colors, setColors] = useState(
-    pattern.shape_paths.map((shape, shapeIndex) => {
-      const singleColor = shape.count === 1 || shape?.isEdge;
-      if(singleColor) {
-        return [DEFAULT_COLORS[shapeIndex]];
-      } else {
-        return Array(shape.count).fill(DEFAULT_COLORS[shapeIndex]);
-      }
-    })
+    mapInitialColorsFromPattern(pattern, DEFAULT_COLORS)
   );
   const [currentColor, setCurrentColor] = useState("#FFFFFF");
 
@@ -47,9 +41,9 @@ function App() {
   useEffect(() => {
     setColors(
       pattern.shape_paths.map((shape, shapeIndex) => {
-        const singleColor = shape.count === 1 || shape?.isEdge;
-        if (singleColor) {
-          return [DEFAULT_COLORS[shapeIndex]];
+        const isSingleColor = shape.count === 1 || shape?.isEdge;
+        if (isSingleColor) {
+          return DEFAULT_COLORS[shapeIndex];
         } else {
           return Array(shape.count).fill(DEFAULT_COLORS[shapeIndex]);
         }
@@ -57,11 +51,15 @@ function App() {
     );
   }, [pattern]);
 
-  const handleColors = (e, shapeIndex, i = 0) => {
+  const handleColors = (e, shapeIndex, isSingleColor, i) => {
     e.preventDefault();
     setColors((prevState) => {
       let newState = [...prevState];
-      newState[shapeIndex][i] = currentColor;
+      if (isSingleColor) {
+        newState[shapeIndex] = currentColor;
+      } else {
+        newState[shapeIndex][i] = currentColor;
+      }
       return newState;
     });
   };
@@ -110,20 +108,22 @@ function App() {
             traditional method as demonstrated by Mohamad Aljanabi.
           </a>
         </p>
-        <div className="d-flex align-items-center p-1">
-          <button className="download" onClick={downloadSVG}>
+        <div className="flex-row-center mb-4">
+          <button className="download w-75" onClick={downloadSVG}>
             Download SVG!
           </button>
         </div>
         {/* <button className="download btn-warning" onClick={() => setPattern(PATTERNS.base_pattern)}>
             change
         </button> */}
-        <label htmlFor="choose_pattern">Choose pattern:</label>
+        <div className="d-flex flex-column justify-content-center align-items-center">
+
+        <label htmlFor="choose_pattern"><span className="pe-2 new-feature">NEW!</span>Choose pattern: </label>
         <select
+          className="ps-4 pe-4 w-75 text-center"
           id="choose_pattern"
           value={selectedPattern}
           onChange={(e) => {
-            console.log(e.target.value);
             setSelectedPattern(e.target.value);
           }}
         >
@@ -135,6 +135,7 @@ function App() {
             );
           })}
         </select>
+        </div>
       </header>
 
       <Editor

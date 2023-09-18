@@ -27,7 +27,7 @@ function Editor({
           </button>
 
           <div className="d-flex flex-column">
-            <label for="lineColor" className={colorDisabled ? "disabled" : ""}>
+            <label htmlFor="lineColor" className={colorDisabled ? "disabled" : ""}>
               Line color:
             </label>
             <input
@@ -40,7 +40,7 @@ function Editor({
             />
           </div>
           <div className="d-flex flex-column">
-            <label for="lineWidth">Line Weight:</label>
+            <label htmlFor="lineWidth">Line Weight:</label>
             <input
               name="lineWidth"
               id="lineWidth"
@@ -53,7 +53,7 @@ function Editor({
           </div>
           {!tesselation && (
             <div className="d-flex flex-column">
-              <label for="fillColor">Shape fill color:</label>
+              <label htmlFor="fillColor">Shape fill color:</label>
               <input
                 name="fillColor"
                 id="fillColor"
@@ -68,7 +68,7 @@ function Editor({
           {tesselation && (
             <div className="tessellation-options flex-row-center">
               <div className="d-flex flex-column">
-                <label for="tileSize">Tile Size:</label>
+                <label htmlFor="tileSize">Tile Size:</label>
                 <input
                   name="tileSize"
                   id="tileSize"

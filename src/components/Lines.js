@@ -12,8 +12,8 @@ function Lines({ pattern, state }) {
               key={path}
               d={path}
               stroke={lines.color}
-              stroke-width={lines.thickness}
-              stroke-linecap="square"
+              strokeWidth={lines.thickness}
+              strokeLinecap="square"
               fill="none"
             ></path>
           );

@@ -10,7 +10,7 @@ import {
 } from "./paths";
 
 const PATTERN_2 = {
-    name: "varation_1",
+    name: "variation_1",
     line_paths: [linePath1, linePath2],
     shape_paths: [
       {

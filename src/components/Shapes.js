@@ -1,15 +1,6 @@
-import { useEffect } from "react";
 import { s } from "../constants";
 
-
 function Shapes({ pattern, colors, handleColors }) {
-
-
-   useEffect(() => {
-    console.log("the current colors are: ", colors)
-   }, [colors])
-
-  
   const TRANSFORM_ORIGIN = `${s} ${s}`;
   /**
    * NOTE
@@ -20,33 +11,33 @@ function Shapes({ pattern, colors, handleColors }) {
     <>
       {pattern.shape_paths.map((shape, shapeIndex) => {
         const isSingle = shape.count === 1;
+        const isSingleColor = shape.count === 1 || shape?.isEdge;
         const needsFlip = shape?.flips;
-        const isEdge = shape?.isEdge;
-        console.log(isEdge)
-
         if (isSingle) {
           return (
             <path
               d={shape.path}
-              fill={colors[shapeIndex][0]}
+              fill={colors[shapeIndex]}
               onClick={(e) => {
-                handleColors(e, shapeIndex)
+                return handleColors(e, shapeIndex, isSingleColor);
               }}
               key={shape.name}
               className={shape.name}
               name={shape.name}
             ></path>
           );
-        } else if (!needsFlip) {
+        }
+        if (!needsFlip) {
           return [...Array(shape.count)].map((_, i) => {
-  
             const rotation = (360 / shape.count) * i;
             return (
               <path
                 d={shape.path}
-                fill={isEdge ? colors[shapeIndex] : colors[shapeIndex][i]}
+                fill={
+                  isSingleColor ? colors[shapeIndex] : colors[shapeIndex][i]
+                }
                 onClick={(e) => {
-                  handleColors(e, shapeIndex, i)
+                  return handleColors(e, shapeIndex, isSingleColor, i);
                 }}
                 key={`${shape.name}-${i}`}
                 className={`${shape.name}-${i}`}
@@ -64,9 +55,11 @@ function Shapes({ pattern, colors, handleColors }) {
               <>
                 <path
                   d={shape.path}
-                  fill={isEdge ? colors[shapeIndex][0] : colors[shapeIndex][i]}
+                  fill={
+                    isSingleColor ? colors[shapeIndex] : colors[shapeIndex][i]
+                  }
                   onClick={(e) => {
-                    handleColors(e, shapeIndex)
+                    return handleColors(e, shapeIndex, isSingleColor, i);
                   }}
                   transform={
                     even
@@ -80,9 +73,11 @@ function Shapes({ pattern, colors, handleColors }) {
                 ></path>
                 <path
                   d={shape.path}
-                  fill={isEdge ? colors[shapeIndex][0] : colors[shapeIndex][i]}
+                  fill={
+                    isSingleColor ? colors[shapeIndex] : colors[shapeIndex][i]
+                  }
                   onClick={(e) => {
-                    handleColors(e, shapeIndex)
+                    return handleColors(e, shapeIndex, isSingleColor, i);
                   }}
                   transform={
                     even
@@ -90,9 +85,9 @@ function Shapes({ pattern, colors, handleColors }) {
                       : `rotate(${rotate4}) scale(-1, 1)`
                   }
                   transform-origin={`${s} ${s}`}
-                  key={`${shape.name}-flipped`}
-                  className={`${shape.name}-flipped`}
-                  name={`${shape.name}-flipped`}
+                  key={`${shape.name}${i}-flipped`}
+                  className={`${shape.name}${i}-flipped`}
+                  name={`${shape.name}${i}-flipped`}
                 ></path>
               </>
             );
