@@ -44,10 +44,10 @@ export const DEFAULT_COLORS = [
     "darkgreen",
     "lightgreen",
     "#4169e1",
-    "orange",
-    "tomato",
+    "#7EAA92",
     "#23D7FB",
     "white",
+    "orange",
 ]; 
 
 

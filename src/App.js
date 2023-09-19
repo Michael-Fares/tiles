@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import PATTERN_1 from "./patterns/pattern1";
 import PATTERN_2 from "./patterns/pattern2";
 import PATTERN_3 from "./patterns/pattern3";
+
 const PATTERNS = {
   base_pattern: PATTERN_1,
   variation_1: PATTERN_2,
