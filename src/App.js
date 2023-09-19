@@ -12,7 +12,7 @@ import PATTERN_3 from "./patterns/pattern3";
 const PATTERNS = {
   base_pattern: PATTERN_1,
   variation_1: PATTERN_2,
-  variation_2: PATTERN_3
+  variation_2: PATTERN_3  
 };
 
 function App() {
